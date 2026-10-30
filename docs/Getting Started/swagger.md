@@ -57,7 +57,7 @@ If your API uses a different port or path, use that instead.
 
 **One product:** `GET /api/products/{id}`. Enter `1` as the `id`.
 
-You should see a `200` response. An ID that does not exist returns `404`. To filter, sort, or page through the list, see [Query Features](../Query%20Features/filtering.md).
+You should see a `200` response. An ID that does not exist returns `404`. To filter, sort, or page through the list, see **Query Features**).
 
 ```json
 {
@@ -132,4 +132,4 @@ Deleting a product cannot be undone, so use a test product.
 
 ## Next Steps
 
-Read the [API Reference](../API%20Reference/get-products.md) for each endpoint in detail, or see [Query Features](../Query-Features/filtering.md) to filter, sort, and paginate results.
+Read the **API Reference** for each endpoint in detail, or see **Query Features** to filter, sort, and paginate results.

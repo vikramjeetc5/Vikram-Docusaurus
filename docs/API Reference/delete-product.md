@@ -80,4 +80,4 @@ A `404` response looks like this:
 
 ## Next Steps
 
-That completes the endpoint reference. Continue to [Query Features](../Query-Features/filtering.md) to learn how to filter, sort, and paginate the product list.
+That completes the endpoint reference. Continue to **Query Features** to learn how to filter, sort, and paginate the product list.

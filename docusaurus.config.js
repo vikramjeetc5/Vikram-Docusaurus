@@ -16,8 +16,8 @@ const config = {
   baseUrl: '/',
 
   // Replace with your GitHub user name and repository name
-  organizationName: '<your-username>',
-  projectName: '<repository-name>',
+  organizationName: 'Vikramjeet Chawla',
+  projectName: 'Vikram-Docusaurus',
 
   onBrokenLinks: 'throw',
 
@@ -67,7 +67,7 @@ const config = {
             position: 'right',
           },
           {
-            href: 'https://github.com/<your-username>/<repository-name>',
+            href: 'https://github.com/vikramjeetc5',
             label: 'GitHub',
             position: 'right',
           },
@@ -86,11 +86,11 @@ const config = {
             title: 'More',
             items: [
               {label: 'Swagger UI', href: 'https://vikram-swaggerui.onrender.com'},
-              {label: 'GitHub', href: 'https://github.com/<your-username>/<repository-name>'},
+              {label: 'GitHub', href: 'https://github.com/vikramjeetc5'},
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} <Your Name>. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Vikramjeet Chawla. Built with Docusaurus.`,
       },
       prism: {
         theme: prismThemes.github,

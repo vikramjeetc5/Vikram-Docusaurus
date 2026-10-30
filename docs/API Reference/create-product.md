@@ -111,4 +111,4 @@ const response = await fetch("https://vikram-swaggerui.onrender.com/api/products
 
 ## Next Steps
 
-Continue to [Update Product](./update-product.md) to change an existing product.
+Continue to **Update Product** to change an existing product.

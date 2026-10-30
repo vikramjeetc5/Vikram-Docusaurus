@@ -87,4 +87,4 @@ A request such as `GET /api/products/99` returns:
 
 ## Next Steps
 
-Continue to [Create Product](./create-product.md) to add a new product to the catalog.
+Continue to **Create Product** to add a new product to the catalog.

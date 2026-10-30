@@ -78,4 +78,4 @@ The last request returns the first page of up to five electronics products that 
 
 ## Next Steps
 
-Continue to [Sorting](./sorting.md) to change the order of the results.
+Continue to **Sorting** to change the order of the results.

@@ -68,4 +68,4 @@ http://localhost:3000/api-docs
 
 ## Next Steps
 
-Continue to the [Swagger UI guide](./swagger.md) to learn how to explore and test the API. If something does not work, see [Troubleshooting](../troubleshooting/common-issues.md).
+Continue to the **Swagger UI** guide to learn how to explore and test the API. If something does not work, see **Troubleshooting**.

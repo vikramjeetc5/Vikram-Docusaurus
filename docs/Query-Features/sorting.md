@@ -80,4 +80,4 @@ The last request returns the first page of up to five electronics products that 
 
 ## Next Steps
 
-Continue to [Pagination](./pagination.md) to control how many products come back at a time.
+Continue to **Pagination** to control how many products come back at a time.
