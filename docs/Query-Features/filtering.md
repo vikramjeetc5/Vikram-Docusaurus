@@ -1,123 +1,81 @@
 ---
 sidebar_position: 1
+description: Filter the product list by category or inventory status.
 ---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import Method from '@site/src/components/Method';
 
 # Filtering
 
-The E-Commerce Product Catalog API supports filtering products using query parameters.
+Use query parameters to get only the products that match what you need, instead of the whole catalog. Filters work on the list endpoint.
 
-Filtering allows clients to retrieve only the products that match specific criteria instead of retrieving the entire catalog.
+| Method | Endpoint | Purpose |
+|---|---|---|
+| <Method type="GET" /> | `/api/products` | Retrieve a list of catalog products |
 
-## Category Filter
+:::tip[Try it live]
 
-Use the `category` query parameter to filter products by category.
+Open `GET /api/products` in [Swagger UI](https://vikram-swaggerui.onrender.com), enter a value in the `category` or `status` field, and select **Execute**.
 
-GET /api/products?category=electronics
+:::
 
+## Filter Parameters
 
-This request returns products belonging to the `electronics` category.
+| Name | Type | Description | Example |
+|---|---|---|---|
+| `category` | string | Products in this category. Matching is case-insensitive | `?category=electronics` |
+| `status` | string | Products with this inventory status | `?status=in_stock` |
 
-### Case-Insensitive Filtering
+`category=electronics`, `category=Electronics`, and `category=ELECTRONICS` return the same products.
 
-Category filtering is case-insensitive.
+## Status Values
 
-For example, the following requests produce the same category filter:
+| Value | Returns |
+|---|---|
+| `in_stock` | Products that are currently available |
+| `out_of_stock` | Products that are currently unavailable |
+| `discontinued` | Products that are no longer sold |
 
-GET /api/products?category=electronics
+## Example Request
 
+<Tabs>
+<TabItem value="curl" label="curl" default>
 
-GET /api/products?category=Electronics
+```bash
+curl "https://vikram-swaggerui.onrender.com/api/products?category=electronics&status=in_stock"
+```
 
+</TabItem>
+<TabItem value="js" label="JavaScript">
 
-GET /api/products?category=ELECTRONICS
+```javascript
+const url = "https://vikram-swaggerui.onrender.com/api/products" +
+  "?category=electronics&status=in_stock";
 
+const response = await fetch(url);
+const result = await response.json();
+```
 
-## Status Filter
+</TabItem>
+</Tabs>
 
-Use the `status` query parameter to filter products according to their inventory status.
+This returns the electronics products that are in stock. The response has the same structure as [Get All Products](../API%20Reference/get-products.md).
 
-GET /api/products?status=in_stock
+## Combine Filters
 
+You can use both filters together, and add sorting or pagination too.
 
-The API supports the following status values:
+| Goal | Request |
+|---|---|
+| Category and status | `GET /api/products?category=electronics&status=in_stock` |
+| With sorting | `GET /api/products?category=electronics&sort=price` |
+| With pagination | `GET /api/products?category=electronics&page=1&limit=5` |
+| All together | `GET /api/products?category=electronics&status=in_stock&sort=-price&page=1&limit=5` |
 
-instock outof_stock discontinued
+The last request returns the first page of up to five electronics products that are in stock, with the most expensive first.
 
+## Next Steps
 
-### In Stock
-
-GET /api/products?status=in_stock
-
-
-Returns products that are currently available.
-
-### Out of Stock
-
-GET /api/products?status=outofstock
-
-
-Returns products that are currently unavailable.
-
-### Discontinued
-
-GET /api/products?status=discontinued
-
-
-Returns products that have been discontinued.
-
-## Combining Filters
-
-Multiple filters can be used in the same request.
-
-For example:
-
-GET /api/products?category=electronics&status=in_stock
-
-
-This request returns products that:
-
-- Belong to the `electronics` category
-- Have an `in_stock` status
-
-## Filtering with Sorting
-
-Filtering can also be combined with sorting.
-
-GET /api/products?category=electronics&sort=price
-
-
-This returns electronic products sorted by price in ascending order.
-
-## Filtering with Pagination
-
-Filtering can also be combined with pagination.
-
-GET /api/products?category=electronics&page=1&limit=5
-
-
-This returns the first five electronic products.
-
-## Complete Example
-
-All supported query features can be combined:
-
-GET /api/products?category=electronics&status=in_stock&sort=-price&page=1&limit=5
-
-
-This request:
-
-1. Filters by the `electronics` category.
-2. Filters for products that are `in_stock`.
-3. Sorts the results by price in descending order.
-4. Returns the first page.
-5. Limits the response to five products.
-
-## Summary
-
-Parameter	Description	Example
-category	Filter by product category	category=electronics
-status	Filter by inventory status	status=in_stock
-Filtering can be combined with sorting and pagination to create more specific product queries.
-
-
----
+Continue to [Sorting](./sorting.md) to change the order of the results.

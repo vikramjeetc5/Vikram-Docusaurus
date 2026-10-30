@@ -1,136 +1,83 @@
 ---
 sidebar_position: 2
+description: Change the order of the product list with the sort parameter.
 ---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import Method from '@site/src/components/Method';
 
 # Sorting
 
-The E-Commerce Product Catalog API supports sorting products using the `sort` query parameter.
+Use the `sort` query parameter to control the order in which products are returned. Sorting works on the list endpoint.
 
-Sorting allows clients to control the order in which products are returned.
+| Method | Endpoint | Purpose |
+|---|---|---|
+| <Method type="GET" /> | `/api/products` | Retrieve a list of catalog products |
 
-## Sort Parameter
+:::tip[Try it live]
 
-Use the `sort` query parameter followed by the field name you want to sort by.
+Open `GET /api/products` in [Swagger UI](https://vikram-swaggerui.onrender.com), choose a value in the `sort` field, and select **Execute**.
 
-GET /api/products?sort=price
+:::
 
+## Sort Values
 
-## Sort by Price
+| Value | Order |
+|---|---|
+| `price` | Price, lowest to highest |
+| `-price` | Price, highest to lowest. The `-` prefix reverses the order |
+| `name` | Product name, alphabetical |
 
-### Ascending Order
+Only one `sort` value can be used in a request.
 
-To sort products from the lowest price to the highest price, use:
+## What the Order Looks Like
 
-GET /api/products?sort=price
+An example with four products priced $19.99, $39.99, $79.99, and $129.99:
 
+| Request | Prices, in the order returned |
+|---|---|
+| `?sort=price` | 19.99, 39.99, 79.99, 129.99 |
+| `?sort=-price` | 129.99, 79.99, 39.99, 19.99 |
 
-Example result:
+## Example Request
 
-$19.99 $39.99 $79.99 $129.99
+<Tabs>
+<TabItem value="curl" label="curl" default>
 
+```bash
+curl "https://vikram-swaggerui.onrender.com/api/products?category=electronics&sort=-price"
+```
 
-### Descending Order
+</TabItem>
+<TabItem value="js" label="JavaScript">
 
-Prefix the field name with `-` to sort in descending order:
+```javascript
+const url = "https://vikram-swaggerui.onrender.com/api/products" +
+  "?category=electronics&sort=-price";
 
-GET /api/products?sort=-price
+const response = await fetch(url);
+const result = await response.json();
+```
 
+</TabItem>
+</Tabs>
 
-Example result:
+This returns the electronics products with the most expensive first. The response has the same structure as [Get All Products](../API%20Reference/get-products.md).
 
-$129.99 $79.99 $39.99 $19.99
+## Combine Sorting
 
+Sorting is applied after filtering, so you get the matching products in the order you asked for.
 
-## Sort by Name
+| Goal | Request |
+|---|---|
+| Sort a filtered list | `GET /api/products?category=electronics&sort=price` |
+| In-stock products, most expensive first | `GET /api/products?status=in_stock&sort=-price` |
+| Sorted and paged | `GET /api/products?sort=-price&page=1&limit=5` |
+| All together | `GET /api/products?category=electronics&status=in_stock&sort=-price&page=1&limit=5` |
 
-Products can also be sorted alphabetically by their name:
+The last request returns the first page of up to five electronics products that are in stock, with the most expensive first.
 
-GET /api/products?sort=name
+## Next Steps
 
-
-This returns products in alphabetical order by product name.
-
-## Supported Sort Fields
-
-Sort Value	Description
-price	Sorts products by price in ascending order
--price	Sorts products by price in descending order
-name	Sorts products alphabetically by name
-Combining Sorting with Filtering
-Sorting can be combined with filtering.
-
-For example:
-
-GET /api/products?category=electronics&sort=price
-This request:
-
-Filters products by the electronics category.
-Sorts the filtered products by price in ascending order.
-Another example:
-
-GET /api/products?status=in_stock&sort=-price
-This returns products that are currently in stock and sorts them from the highest price to the lowest price.
-
-Combining Sorting with Pagination
-Sorting can also be combined with pagination:
-
-GET /api/products?sort=-price&page=1&limit=5
-This request:
-
-Sorts products by price in descending order.
-Returns the first page.
-Limits the response to five products.
-Combining All Query Features
-Filtering, sorting, and pagination can be used together in a single request.
-
-GET /api/products?category=electronics&status=in_stock&sort=-price&page=1&limit=5
-This request:
-
-Filters products by the electronics category.
-Filters products with an in_stock status.
-Sorts the results by price in descending order.
-Returns the first page.
-Limits the response to five products.
-Example Request
-A complete sorting request might look like:
-
-GET /api/products?category=electronics&sort=-price
-The API first filters the products by category and then returns the matching products sorted by price from highest to lowest.
-
-Swagger UI
-Sorting can also be tested directly through Swagger UI.
-
-Open:
-
-http://localhost:3000/api-docs
-Find:
-
-GET /api/products
-Select Try it out and enter the desired value for the sort parameter.
-
-For example:
-
-sort=-price
-Then select Execute to send the request.
-
-Summary
-The sort parameter controls the order of products returned by the API.
-
-sort=price
-Sorts by price from lowest to highest.
-
-sort=-price
-Sorts by price from highest to lowest.
-
-sort=name
-Sorts products alphabetically by name.
-
-Sorting can be combined with filtering and pagination to create more specific product queries.
-
-
-After this, your `query-features` folder will be:
-
-query-features/ ├── filtering.md ├── sorting.md └── pagination.md
-
-
-Then **pagination** will be the last one in this section.
+Continue to [Pagination](./pagination.md) to control how many products come back at a time.

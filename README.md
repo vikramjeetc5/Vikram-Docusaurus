@@ -1,43 +1,62 @@
-# Website
+# E-Commerce Product Catalog API Documentation
 
-This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
+Documentation site for the **E-Commerce Product Catalog API**, a REST API for managing products in an online store's catalog. It explains how to install and run the API, how to use Swagger UI, and how every endpoint, query feature, and common problem works.
 
-## Installation
+**Live documentation:** <https://your-docs-site-link>
+**Live Swagger UI:** <https://vikram-swaggerui.onrender.com>
+
+## What's Inside
+
+| Section | Pages |
+|---|---|
+| **Welcome** | Overview of the API, endpoints, and quick start |
+| **Getting Started** | Installation, Swagger UI |
+| **API Reference** | Get All Products, Get Product by ID, Create Product, Update Product, Delete Product |
+| **Query Features** | Filtering, Sorting, Pagination |
+| **FAQ** | Answers to common questions |
+| **Troubleshooting** | Common issues and fixes |
+
+## Documentation Approach
+
+- **One layout for every endpoint page:** a header table, a "try it live" link, parameters, example requests in curl and JavaScript, responses, and next steps.
+- **Tables for lookups, tabs for alternatives, expandable sections for reference detail,** so each page stays short.
+- **Examples match the OpenAPI specification** used by the live Swagger UI.
+- **Docs-as-code:** written in Markdown and MDX, kept in Git, and built with Docusaurus.
+
+## Run Locally
 
 ```bash
+git clone https://github.com/<your-username>/<repository-name>.git
+cd <repository-name>
 npm install
+npm start
 ```
 
-**Note**: feel free to use the package manager of your choice.
-
-## Local Development
-
-```bash
-npm run start
-```
-
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
-
-## Build
+The site opens at `http://localhost:3000`. To create a production build:
 
 ```bash
 npm run build
 ```
 
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
+## Project Structure
 
-## Deployment
-
-Using SSH:
-
-```bash
-USE_SSH=true npm run deploy
+```text
+docs/
+├── intro.mdx
+├── Getting Started/
+├── API Reference/
+├── Query Features/
+├── FAQ/
+└── Troubleshooting/
+src/
+└── components/
+    └── Method/        # Coloured GET / POST / PUT / DELETE labels
 ```
 
-Not using SSH:
+## Built With
 
-```bash
-GIT_USER = "https://github.com/VikramjeetChawla"
-```
+[Docusaurus](https://docusaurus.io/), Markdown and MDX, Swagger UI (OpenAPI 3.0), and Git.
 
-If you are using GitHub Pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+## Author
+
+**<Your Name>**: <https://www.linkedin.com/in/your-profile> | <https://github.com/your-username>

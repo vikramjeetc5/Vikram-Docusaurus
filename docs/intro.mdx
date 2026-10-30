@@ -1,155 +1,112 @@
 ---
 sidebar_position: 1
+description: A REST API for managing products in an e-commerce catalog, with filtering, sorting, and pagination.
 ---
 
 # E-Commerce Product Catalog API
 
-Welcome to the **E-Commerce Product Catalog API** documentation.
+Welcome to the documentation for the E-Commerce Product Catalog API, a REST API for managing the products in an online store's catalog. Use it to create, read, update, and delete products, and to filter, sort, and page through the results.
 
-The E-Commerce Product Catalog API is a RESTful API designed to manage products in an e-commerce catalog. It provides endpoints for creating, retrieving, updating, and deleting products.
+:::tip[Try it live]
 
-The API also supports filtering, sorting, and pagination to make it easier to retrieve and manage product data.
+Explore and test every endpoint in [Swagger UI](https://vikram-swaggerui.onrender.com), straight from your browser. The first request after a quiet period may take up to a minute to respond.
 
-## API Overview
+:::
 
-The API provides the following operations:
+
+
+## At a Glance
+
+| Detail | Value |
+|---|---|
+| Base URL | `https://vikram-swaggerui.onrender.com` |
+| Format | JSON |
+| API version | 1.0.0 |
+| Specification | OpenAPI 3.0 |
+
+
+## Endpoints
+
+import Method from '@site/src/components/Method';
 
 | Method | Endpoint | Description |
 |---|---|---|
-| `GET` | `/api/products` | Retrieve all products |
-| `GET` | `/api/products/:id` | Retrieve a product by ID |
-| `POST` | `/api/products` | Create a new product |
-| `PUT` | `/api/products/:id` | Update an existing product |
-| `DELETE` | `/api/products/:id` | Delete a product |
+| <Method type="GET" /> | `/api/products` | Retrieve all products |
+| <Method type="GET" /> | `/api/products/{id}` | Retrieve a product by ID |
+| <Method type="POST" /> | `/api/products` | Create a new product |
+| <Method type="PUT" /> | `/api/products/{id}` | Update an existing product |
+| <Method type="DELETE" /> | `/api/products/{id}` | Delete a product |
 
-## Core Features
+## What You Can Do With Query Parameters
 
-### Product Management
+| Feature | What it does | Example |
+|---|---|---|
+| Filter by category | Case-insensitive match on the category | `?category=electronics` |
+| Filter by status | `in_stock`, `out_of_stock`, or `discontinued` | `?status=in_stock` |
+| Sort | `price` (low to high), `-price` (high to low), or `name` | `?sort=-price` |
+| Paginate | 10 products per page by default | `?page=1&limit=5` |
 
-The API provides complete CRUD operations for products:
+You can combine them in one request:
 
-- **Create** new products using `POST`
-- **Read** products using `GET`
-- **Update** products using `PUT`
-- **Delete** products using `DELETE`
-
-### Filtering
-
-Products can be filtered using query parameters.
-
-For example:
-
-GET /api/products?category=electronics
-
-
-Products can also be filtered by inventory status:
-
-GET /api/products?status=in_stock
-
-
-Supported status values include:
-
-instock outof_stock discontinued
-
-
-### Sorting
-
-The API supports sorting products using the `sort` query parameter.
-
-Sort by price in ascending order:
-
-GET /api/products?sort=price
-
-
-Sort by price in descending order:
-
-GET /api/products?sort=-price
-
-
-Products can also be sorted alphabetically by name:
-
-GET /api/products?sort=name
-
-
-### Pagination
-
-Product results are paginated to keep response sizes manageable.
-
-The default page size is **10 products per response**.
-
-You can specify a page and limit:
-
-GET /api/products?page=1&limit=5
-
-
-This requests the first page with a maximum of five products.
-
-## Example Request
-
-Multiple query parameters can be combined in a single request.
-
+```http
 GET /api/products?category=electronics&status=in_stock&sort=-price&page=1&limit=5
+```
 
+This returns the first page of up to five electronics products that are in stock, with the most expensive first.
 
-This request:
+## Quick Start
 
-1. Filters products by the `electronics` category.
-2. Returns only products that are `in_stock`.
-3. Sorts products by price in descending order.
-4. Requests the first page.
-5. Limits the response to five products.
+1. Follow the [Installation](./getting-started/installation.md) guide to run the API locally.
+2. Open [Swagger UI](./getting-started/swagger.md) to explore the endpoints.
+3. Try `GET /api/products`, then experiment with filters and sorting.
 
-## Interactive API Documentation
+## Documentation Sections
+import Link from '@docusaurus/Link';
 
-The API includes **Swagger UI**, which provides an interactive interface for exploring and testing the available endpoints.
-
-With Swagger UI, you can:
-
-- View all available endpoints
-- Inspect request parameters
-- View request and response schemas
-- Test API requests directly from the browser
-- Experiment with filtering, sorting, and pagination
-- Test `GET`, `POST`, `PUT`, and `DELETE` operations
-
-## Documentation Structure
-
-This documentation is organized into the following sections:
-
-### Getting Started
-
-Learn how to install and run the API locally and how to use Swagger UI.
-
-### API Reference
-
-Learn about each API endpoint, including its parameters, request body, responses, and examples.
-
-### Query Features
-
-Learn how filtering, sorting, and pagination work when retrieving products.
-
-## Getting Started
-
-If you are new to the project, start with the [Installation](./getting-started/installation.md) guide.
-
-After installing the API, continue to the [Swagger UI](./getting-started/swagger.md) guide to learn how to explore and test the API interactively.
-Your documentation will now start looking like a proper API documentation site:
-
-Documentation
-│
-├── Introduction
-│
-├── Getting Started
-│   ├── Installation
-│   └── Swagger UI
-│
-└── API Reference
-    ├── Get All Products
-    ├── Get Product by ID
-    ├── Create Product
-    ├── Update Product
-    └── Delete Product
-    
-Next, I recommend creating the API Reference section, starting with get-products.md, because that's where we can document your actual GET /api/products endpoint—including filtering, sorting, and pagination—in a professional API-doc style.
-
-
+<div className="row">
+  <div className="col col--4 margin-bottom--lg">
+    <div className="card">
+      <div className="card__header"><h3>Getting Started</h3></div>
+      <div className="card__body"><p>Installation and how to use Swagger UI</p></div>
+      <div className="card__footer">
+        <Link className="button button--primary button--block" to="/docs/Getting Started/Installation">Open</Link>
+      </div>
+    </div>
+  </div>
+  <div className="col col--4 margin-bottom--lg">
+    <div className="card">
+      <div className="card__header"><h3>API Reference</h3></div>
+      <div className="card__body"><p>Every endpoint, with parameters, responses, and examples</p></div>
+      <div className="card__footer">
+        <Link className="button button--primary button--block" to="/docs/API Reference/get-products">Open</Link>
+      </div>
+    </div>
+  </div>
+  <div className="col col--4 margin-bottom--lg">
+    <div className="card">
+      <div className="card__header"><h3>Query Features</h3></div>
+      <div className="card__body"><p>Filtering, sorting, and pagination</p></div>
+      <div className="card__footer">
+        <Link className="button button--primary button--block" to="/docs/Query-Features/filtering">Open</Link>
+      </div>
+    </div>
+  </div>
+  <div className="col col--4 margin-bottom--lg">
+    <div className="card">
+      <div className="card__header"><h3>FAQ</h3></div>
+      <div className="card__body"><p>Answers to common questions</p></div>
+      <div className="card__footer">
+        <Link className="button button--primary button--block" to="/docs/faq/frequently-asked-questions">Open</Link>
+      </div>
+    </div>
+  </div>
+  <div className="col col--4 margin-bottom--lg">
+    <div className="card">
+      <div className="card__header"><h3>Troubleshooting</h3></div>
+      <div className="card__body"><p>Fixes for commonly faced issues</p></div>
+      <div className="card__footer">
+        <Link className="button button--primary button--block" to="/docs/troubleshooting/common-issues">Open</Link>
+      </div>
+    </div>
+  </div>
+</div>

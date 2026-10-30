@@ -1,163 +1,114 @@
 ---
 sidebar_position: 3
+description: Add a new product to the catalog.
 ---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import Method from '@site/src/components/Method';
 
 # Create Product
 
-Creates a new product in the E-Commerce Product Catalog.
+Adds a new product to the catalog. Send the product details as JSON in the request body.
 
-## Endpoint
+| Method | Endpoint | Purpose |
+|---|---|---|
+| <Method type="POST" /> | `/api/products` | Add a new product to the catalog |
 
-POST /api/products
+:::tip[Try it live]
 
+Test this endpoint in [Swagger UI](https://vikram-swaggerui.onrender.com): open `POST /api/products`, select **Try it out**, edit the request body, and select **Execute**.
 
-This endpoint accepts product information in the request body and adds a new product to the catalog.
+:::
+
+:::note[Demo server]
+
+The live server is a demo that anyone can use, so its data may change or reset at any time.
+
+:::
 
 ## Request Body
 
-The product information should be sent as a JSON object.
+| Field | Type | Required | Description |
+|---|---|---|---|
+| `name` | string | Yes | Product name. It must be unique in the catalog |
+| `category` | string | Yes | Category, for example `electronics` |
+| `price` | number | Yes | Price. It cannot be negative |
+| `stock` | integer | Yes | Units in stock. It cannot be negative |
+| `status` | string | Yes | `in_stock`, `out_of_stock`, or `discontinued` |
 
-Example:
+## Example Request
+
+<Tabs>
+<TabItem value="curl" label="curl" default>
+
 ```bash
-{
-  "name": "Wireless Headphones",
-  "category": "electronics",
-  "price": 79.99,
-  "status": "in_stock"
-}
-```
-
-## Request Body Parameters
-
-Field	Type	Required	Description
-name	string	Yes	Name of the product
-category	string	Yes	Category assigned to the product
-price	number	Yes	Price of the product
-status	string	Yes	Current inventory status
-Supported status values:
-
-in_stock
-out_of_stock
-discontinued
-Note: The fields above are based on the example product structure used in this documentation. Update the table to match the exact schema implemented by your API.
-Example Request
-POST /api/products
-Content-Type: application/json
-Request body:
-```bash
-{
-  "name": "Wireless Headphones",
-  "category": "electronics",
-  "price": 79.99,
-  "status": "in_stock"
-}
-```
-Example using cURL
-The endpoint can also be tested using cURL:
-```bash
-curl -X POST http://localhost:3000/api/products \
+curl -X POST https://vikram-swaggerui.onrender.com/api/products \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "Wireless Headphones",
+    "name": "Bluetooth Speaker",
     "category": "electronics",
-    "price": 79.99,
+    "price": 49.99,
+    "stock": 20,
     "status": "in_stock"
   }'
 ```
-Successful Response
-If the product is successfully created, the API should return a success response containing the newly created product.
 
-Example:
+</TabItem>
+<TabItem value="js" label="JavaScript">
 
-201 Created
-Example response:
+```javascript
+const response = await fetch("https://vikram-swaggerui.onrender.com/api/products", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    name: "Bluetooth Speaker",
+    category: "electronics",
+    price: 49.99,
+    stock: 20,
+    status: "in_stock",
+  }),
+});
+```
 
-```bash
+</TabItem>
+</Tabs>
+
+## Responses
+
+| Code | Meaning |
+|---|---|
+| `201` | The product was created |
+| `400` | The input is invalid, for example a missing field, a negative price or stock, or an unsupported status |
+| `409` | A product with that name already exists |
+
+<Tabs>
+<TabItem value="400" label="400 Invalid input" default>
+
+```json
 {
-  "id": 101,
-  "name": "Wireless Headphones",
-  "category": "electronics",
-  "price": 79.99,
-  "status": "in_stock"
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "Price must be a positive number."
+  }
 }
 ```
 
-The API assigns a unique ID to the newly created product.
+</TabItem>
+<TabItem value="409" label="409 Duplicate">
 
-Validation
-The API should validate the submitted product data before creating the product.
-
-Examples of invalid requests include:
-
-Missing required fields
-Invalid product price
-Invalid product status
-Incorrect data types
-For example, an invalid status value:
-```bash
+```json
 {
-  "name": "Wireless Headphones",
-  "category": "electronics",
-  "price": 79.99,
-  "status": "available"
+  "error": {
+    "code": "PRODUCT_ALREADY_EXISTS",
+    "message": "A product named 'Bluetooth Speaker' already exists."
+  }
 }
 ```
-The value available is not one of the supported inventory statuses.
 
-Example Error Response
-If the submitted data is invalid, the API may return a client error.
+</TabItem>
+</Tabs>
 
-For example:
+## Next Steps
 
-400 Bad Request
-Example response:
-```bash
-{
-  "message": "Invalid product data"
-}
-```
-Note: Use the exact status code and error response returned by your API if they differ from this example.
-Using Swagger UI
-You can test the POST /api/products endpoint directly through Swagger UI.
-
-Start the API and open:
-
-http://localhost:3000/api-docs
-Locate:
-
-POST /api/products
-Select Try it out.
-
-Enter the product information in the request body:
-```bash
-{
-  "name": "Wireless Headphones",
-  "category": "electronics",
-  "price": 79.99,
-  "status": "in_stock"
-}
-```
-Select Execute to send the request.
-
-Swagger UI will display the request result and the response returned by the API.
-
-How It Works
-The product creation process follows these steps:
-
-The client sends a POST request to /api/products.
-The product information is included in the request body.
-The API validates the submitted data.
-A new product is created.
-The API assigns a unique ID to the product.
-The newly created product is returned in the response.
-Next Steps
-Continue to Update Product to learn how to modify an existing product using its ID.
-
-
-Your API Reference section is now:
-
-API Reference │ ├── Get All Products ├── Get Product by ID └── Create Product
-
-
-Next, we can create **`update-product.md`** for `PUT /api/products/:id`, and after that **`delete-product.md`** for `DELETE /api/products/:id`.
-
+Continue to [Update Product](./update-product.md) to change an existing product.

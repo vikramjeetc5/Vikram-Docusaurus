@@ -1,0 +1,148 @@
+---
+sidebar_position: 1
+description: Fixes for commonly faced problems when installing, running, and testing the API.
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Common Issues
+
+Fixes for problems you may meet when installing, running, or testing the E-Commerce Product Catalog API.
+
+:::tip[Not sure where the problem is?]
+
+Try the same request in [Swagger UI](https://vikram-swaggerui.onrender.com). If it works there, the API is fine and the problem is in your request. If it fails there too, look at the server.
+
+:::
+
+## Quick Diagnosis
+
+| What you see | Likely cause | What to do |
+|---|---|---|
+| The API will not start | Missing dependencies, or the wrong start command | Run `npm install`, then `npm run dev`. Check `package.json` for the real command |
+| "Port already in use" | Another program is using the port | See [Port already in use](#port-already-in-use) below |
+| Swagger UI does not load | The server is not running, or the port or path is wrong | Check the terminal, the port, and the `/api-docs` path |
+| `400` response | Invalid input | Check required fields, number values, and the status value |
+| `404` response | The product ID does not exist | Check the ID with `GET /api/products` |
+| `409` response | A product with that name already exists | Use a different name |
+| The first request on the live demo is very slow | The demo server may sleep when idle | Wait up to a minute, then try again |
+
+## Server Problems
+
+<details>
+<summary>The API server does not start</summary>
+
+1. Install the dependencies:
+
+   ```bash
+   npm install
+   ```
+
+2. Start the API again:
+
+   ```bash
+   npm run dev
+   ```
+
+3. Read the error in the terminal. If your project uses a different start command, use the one in the `scripts` section of `package.json`.
+
+</details>
+
+<details id="port-already-in-use">
+<summary>Port already in use</summary>
+
+Another program is already using the port, for example `3000`. Find it and stop it, or run the API on a different port.
+
+<Tabs>
+<TabItem value="mac" label="macOS / Linux" default>
+
+```bash
+lsof -i :3000
+kill <PID>
+```
+
+</TabItem>
+<TabItem value="win" label="Windows">
+
+```bash
+netstat -ano | findstr :3000
+taskkill /PID <PID> /F
+```
+
+</TabItem>
+</Tabs>
+
+Replace `<PID>` with the process ID shown in the first command's output. If you change the API's port, use the new port in every URL, for example `http://localhost:3001/api-docs`. This documentation site also starts on port 3000 by default, so the two can clash.
+
+</details>
+
+<details>
+<summary>Swagger UI does not load</summary>
+
+1. Check that the API server is running and has no errors in the terminal.
+2. Check the port. The default is `3000`.
+3. Check the path: `http://localhost:3000/api-docs`.
+4. Open the live demo at [vikram-swaggerui.onrender.com](https://vikram-swaggerui.onrender.com) to confirm that Swagger UI itself works.
+
+</details>
+
+## Request Problems
+
+<details>
+<summary>GET /api/products returns an error</summary>
+
+Check that the API is running and the URL is correct. For a local API, use `http://localhost:3000/api/products`. Then check any query parameters you added. An unsupported value for `sort` or `status` can cause an error.
+
+</details>
+
+<details>
+<summary>I get a 404 when getting, updating, or deleting a product</summary>
+
+The product ID does not exist, or the product was already deleted. Call `GET /api/products` to see the IDs that exist, then try again.
+
+</details>
+
+<details>
+<summary>I get a 400 when creating or updating a product</summary>
+
+Check the request body for these problems:
+
+- A required field is missing (`name`, `category`, `price`, `stock`, `status`)
+- `price` or `stock` is negative
+- `status` is not one of `in_stock`, `out_of_stock`, or `discontinued`. For example, `"status": "available"` is rejected.
+- The JSON is not valid, such as a missing comma or quotation mark
+
+</details>
+
+<details>
+<summary>I get a 409 when creating a product</summary>
+
+A product with that name already exists. Choose a different name, or update the existing product with `PUT`.
+
+</details>
+
+<details>
+<summary>My POST or PUT request fails</summary>
+
+- Use the right method (`POST` to `/api/products`, or `PUT` to `/api/products/{id}`).
+- Send valid JSON in the body.
+- Set the `Content-Type` header to `application/json`.
+- For `PUT`, make sure the product ID exists.
+
+</details>
+
+<details>
+<summary>My filter, sort, or page request fails</summary>
+
+Check that the parameter name is spelled correctly and the value is supported. For `sort`, use `price`, `-price`, or `name`. For `status`, use `in_stock`, `out_of_stock`, or `discontinued`. See [Query Features](../Query%20Features/filtering.md).
+
+</details>
+
+## Still Having Problems?
+
+1. Read the error in the terminal where the API is running.
+2. If you call the API from a web page, open the browser's developer console and read the error there.
+3. Check the URL, the port, the request method, and the parameters.
+4. Test the same request in Swagger UI.
+5. Check the answers in the [FAQ](../FAQ/faq.md).

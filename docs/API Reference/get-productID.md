@@ -1,127 +1,90 @@
 ---
 sidebar_position: 2
+description: Retrieve the details of one product using its ID.
 ---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import Method from '@site/src/components/Method';
 
 # Get Product by ID
 
-Retrieves a specific product from the E-Commerce Product Catalog using its unique product ID.
+Returns the details of a single product when you know its ID.
 
-## Endpoint
+| Method | Endpoint | Purpose |
+|---|---|---|
+| <Method type="GET" /> | `/api/products/{id}` | Get details for a specific product |
 
-GET /api/products/:id
+:::tip[Try it live]
 
+Test this endpoint in [Swagger UI](https://vikram-swaggerui.onrender.com): open `GET /api/products/{id}`, enter an `id`, and select **Execute**.
 
-The `:id` parameter identifies the product that you want to retrieve.
+:::
 
-## Path Parameters
+## Path Parameter
 
-Parameter	Type	Required	Description
-id	integer	Yes	Unique identifier of the product
-Request
-To retrieve a product, provide its ID in the request URL.
+| Name | Type | Required | Description |
+|---|---|---|---|
+| `id` | integer | Yes | Unique ID of the product |
 
-Example:
+## Example Request
 
-GET /api/products/1
-This request retrieves the product with an ID of 1.
+<Tabs>
+<TabItem value="curl" label="curl" default>
 
-Another example:
-
-GET /api/products/25
-This retrieves the product with an ID of 25.
-
-Example URL
-When running the API locally:
-
-http://localhost:3000/api/products/1
-Example Response
-A successful request returns the product associated with the specified ID.
-
-Example:
 ```bash
+curl https://vikram-swaggerui.onrender.com/api/products/1
+```
 
+</TabItem>
+<TabItem value="js" label="JavaScript">
+
+```javascript
+const response = await fetch("https://vikram-swaggerui.onrender.com/api/products/1");
+const product = await response.json();
+```
+
+</TabItem>
+</Tabs>
+
+## Responses
+
+| Code | Meaning |
+|---|---|
+| `200` | The product was found and returned |
+| `404` | No product exists with that ID |
+
+<Tabs>
+<TabItem value="200" label="200 Success" default>
+
+```json
 {
   "id": 1,
-  "name": "Wireless Headphones",
+  "name": "Wireless Noise-Canceling Headphones",
   "category": "electronics",
-  "price": 79.99,
+  "price": 199.99,
+  "stock": 45,
   "status": "in_stock"
 }
 ```
 
-Note: The response above is an example. Replace the fields with the exact product schema returned by your API if it differs.
-Successful Response
-If the product exists, the API should return:
+</TabItem>
+<TabItem value="404" label="404 Not found">
 
-200 OK
-The response body contains the requested product.
+A request such as `GET /api/products/99` returns:
 
-Example:
-```bash
-
+```json
 {
-  "id": 1,
-  "name": "Wireless Headphones",
-  "category": "electronics",
-  "price": 79.99,
-  "status": "in_stock"
+  "error": {
+    "code": "PRODUCT_NOT_FOUND",
+    "message": "No product exists with ID 99."
+  }
 }
 ```
-Product Not Found
-If a product with the specified ID does not exist, the API should return an appropriate error response.
 
-For example:
+</TabItem>
+</Tabs>
 
-404 Not Found
-Example response:
-```bash
+## Next Steps
 
-{
-  "message": "Product not found"
-}
-```
-Note: Use the exact status code and response body returned by your API if they are different from this example.
-Request Examples
-Retrieve Product 1
-GET /api/products/1
-Retrieve Product 10
-GET /api/products/10
-Retrieve Product 100
-GET /api/products/100
-Using Swagger UI
-You can test this endpoint using Swagger UI.
-
-Start the API and open:
-
-http://localhost:3000/api-docs
-Locate:
-
-GET /api/products/:id
-Select Try it out, enter the product ID, and select Execute.
-
-For example:
-
-id: 1
-Swagger UI will send:
-
-GET /api/products/1
-and display the API response.
-
-How It Works
-The request follows this process:
-
-The client sends a GET request with a product ID.
-The API reads the ID from the request URL.
-The API searches the product catalog for the matching product.
-If the product exists, the API returns the product.
-If the product does not exist, the API returns a 404 Not Found response.
-Next Steps
-Continue to Create Product to learn how to add a new product to the catalog.
-
-
-Your API Reference is now becoming:
-
-API Reference │ ├── Get All Products └── Get Product by ID
-
-
-Next should be **`create-product.md`** for `POST /api/products`, followed by **Update Product** and **Delete Product**
+Continue to [Create Product](./create-product.md) to add a new product to the catalog.

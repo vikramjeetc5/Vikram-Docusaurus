@@ -1,8 +1,8 @@
 {
-  "label": "API-Reference",
+  "label": "API Reference",
   "position": 3,
   "link": {
     "type": "generated-index",
-    "description": "5 minutes to learn the most important Docusaurus concepts."
+    "description": "Every endpoint of the E-Commerce Product Catalog API, with parameters, request bodies, responses, and examples."
   }
 }

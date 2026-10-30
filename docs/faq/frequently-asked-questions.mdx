@@ -1,0 +1,116 @@
+---
+sidebar_position: 1
+description: Answers to common questions about the E-Commerce Product Catalog API.
+---
+
+import Method from '@site/src/components/Method';
+
+# Frequently Asked Questions
+
+Short answers to common questions about the E-Commerce Product Catalog API, with links to the full pages.
+
+## Quick Reference
+
+| I want to... | Use |
+|---|---|
+| Get all products | <Method type="GET" /> `/api/products` |
+| Get one product | <Method type="GET" /> `/api/products/{id}` |
+| Create a product | <Method type="POST" /> `/api/products` |
+| Update a product | <Method type="PUT" /> `/api/products/{id}` |
+| Delete a product | <Method type="DELETE" /> `/api/products/{id}` |
+
+Details for each are in the [API Reference](../API%20Reference/get-products.md).
+
+## About the API
+
+<details>
+<summary>What is the E-Commerce Product Catalog API?</summary>
+
+A REST API for managing the products in an online store's catalog. You can create, read, update, and delete products, and you can filter, sort, and paginate the product list.
+
+</details>
+
+<details>
+<summary>Does the API need authentication?</summary>
+
+No. All endpoints are open, so you can call them directly without a key or token.
+
+</details>
+
+<details>
+<summary>How do I test the API?</summary>
+
+The easiest way is [Swagger UI](https://vikram-swaggerui.onrender.com), where you can pick an endpoint, fill in the fields, and send a request from your browser. When you run the API locally, Swagger UI is at `http://localhost:3000/api-docs`. You can also use curl, Postman, or any other API client. See the [Swagger UI guide](../Getting%20Started/swagger.md).
+
+</details>
+
+<details>
+<summary>What statuses can a product have?</summary>
+
+`in_stock`, `out_of_stock`, and `discontinued`.
+
+</details>
+
+## Query Features
+
+<details>
+<summary>How do I filter products?</summary>
+
+Add `category` or `status` to the list request, for example `GET /api/products?category=electronics`. See [Filtering](../Query%20Features/filtering.md).
+
+</details>
+
+<details>
+<summary>How do I sort products?</summary>
+
+Use `sort=price` for lowest to highest, `sort=-price` for highest to lowest, or `sort=name` for alphabetical order. See [Sorting](../Query%20Features/sorting.md).
+
+</details>
+
+<details>
+<summary>How does pagination work?</summary>
+
+Use `page` and `limit`, for example `?page=1&limit=5`. The default page size is 10 products. See [Pagination](../Query%20Features/pagination.md).
+
+</details>
+
+<details>
+<summary>Can I combine filtering, sorting, and pagination?</summary>
+
+Yes. This request returns the first page of up to five electronics products that are in stock, with the most expensive first:
+
+```http
+GET /api/products?category=electronics&status=in_stock&sort=-price&page=1&limit=5
+```
+
+</details>
+
+## Errors
+
+| Code | Meaning | Common cause |
+|---|---|---|
+| `400` | Invalid input | A missing required field, a negative price or stock, or an unsupported status |
+| `404` | Not found | The product ID does not exist or was deleted |
+| `409` | Conflict | A product with that name already exists |
+
+<details>
+<summary>What does an error response look like?</summary>
+
+Every error uses the same structure:
+
+```json
+{
+  "error": {
+    "code": "PRODUCT_NOT_FOUND",
+    "message": "No product exists with ID 99."
+  }
+}
+```
+
+</details>
+
+:::tip[Where to start]
+
+New to the API? Begin with [Installation](../Getting%20Started/installation.md), then try each endpoint in [Swagger UI](../Getting%20Started/swagger.md). If something does not work, see [Troubleshooting](../Troubleshooting/common-issues.md).
+
+:::

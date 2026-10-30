@@ -1,0 +1,108 @@
+---
+sidebar_position: 1
+description: Retrieve a paginated list of products, with optional filtering and sorting.
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import Method from '@site/src/components/Method';
+
+# Get All Products
+
+Returns a paginated list of products from the catalog. You can filter by category or status and sort by price or name.
+
+| Method | Endpoint | Purpose |
+|---|---|---|
+| <Method type="GET" /> | `/api/products` | Retrieve a list of catalog products |
+
+:::tip[Try it live]
+
+Test this endpoint in [Swagger UI](https://vikram-swaggerui.onrender.com): open `GET /api/products`, select **Try it out**, and then **Execute**.
+
+:::
+
+## Query Parameters
+
+All parameters are optional.
+
+| Name | Type | Default | Description |
+|---|---|---|---|
+| `page` | integer | `1` | Page number |
+| `limit` | integer | `10` | Maximum products per page |
+| `category` | string | none | Filter by category (case-insensitive), for example `electronics` |
+| `status` | string | none | Filter by availability: `in_stock`, `out_of_stock`, or `discontinued` |
+| `sort` | string | none | `price` (low to high), `-price` (high to low), or `name` |
+
+For how each one works, see [Filtering](../Query%20Features/filtering.md), [Sorting](../Query%20Features/sorting.md), and [Pagination](../Query%20Features/pagination.md).
+
+## Example Request
+
+<Tabs>
+<TabItem value="curl" label="curl" default>
+
+```bash
+curl "https://vikram-swaggerui.onrender.com/api/products?category=electronics&status=in_stock&sort=-price&page=1&limit=5"
+```
+
+</TabItem>
+<TabItem value="js" label="JavaScript">
+
+```javascript
+const url = "https://vikram-swaggerui.onrender.com/api/products" +
+  "?category=electronics&status=in_stock&sort=-price&page=1&limit=5";
+
+const response = await fetch(url);
+const result = await response.json();
+```
+
+</TabItem>
+</Tabs>
+
+This returns the first page of up to five electronics products that are in stock, with the most expensive first.
+
+## Common Requests
+
+| Goal | Request |
+|---|---|
+| All products | `GET /api/products` |
+| Electronics only | `GET /api/products?category=electronics` |
+| Products in stock | `GET /api/products?status=in_stock` |
+| Most expensive first | `GET /api/products?sort=-price` |
+| Five per page | `GET /api/products?page=1&limit=5` |
+
+## Response
+
+A successful request returns **200 OK** with this body:
+
+```json
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "Wireless Noise-Canceling Headphones",
+      "category": "electronics",
+      "price": 199.99,
+      "stock": 45,
+      "status": "in_stock"
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "limit": 10,
+    "total": 1,
+    "totalPages": 1
+  }
+}
+```
+
+| Field | Description |
+|---|---|
+| `data` | The list of products on this page |
+| `pagination.page` | The current page number |
+| `pagination.limit` | The number of products requested per page |
+| `pagination.total` | The total number of products that match the request |
+| `pagination.totalPages` | The total number of pages |
+
+## Next Steps
+
+Continue to [Get Product by ID](./get-productID.md) to retrieve a single product.

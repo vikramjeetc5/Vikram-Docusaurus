@@ -1,207 +1,135 @@
 ---
 sidebar_position: 2
+description: Explore and test every endpoint of the E-Commerce Product Catalog API from your browser.
 ---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # Swagger UI
 
-Swagger UI provides an interactive interface for exploring, understanding, and testing the **E-Commerce Product Catalog API**.
+Swagger UI is an interactive page generated from the API's OpenAPI specification. It lists every endpoint and lets you send real requests from the browser, with no extra tools.
 
-Instead of manually creating HTTP requests, Swagger UI allows you to select an endpoint, provide the required parameters or request body, and execute the request directly from the browser.
+:::tip[Try it live]
 
-## What is Swagger UI?
+Open the [live Swagger UI](https://vikram-swaggerui.onrender.com) and follow the steps below.
 
-Swagger UI is an interactive documentation interface generated from an OpenAPI specification.
+:::
 
-For this project, Swagger UI documents the available product endpoints and provides information about:
+## Open Swagger UI
 
-- HTTP methods
-- Endpoint URLs
-- Query parameters
-- Path parameters
-- Request bodies
-- Response formats
-- API status codes
+<Tabs>
+<TabItem value="live" label="Live demo" default>
 
-## Accessing Swagger UI
+Open the [live Swagger UI](https://vikram-swaggerui.onrender.com) in your browser. The first request after a quiet period may take up to a minute to respond.
 
-Start the E-Commerce Product Catalog API locally.
+</TabItem>
+<TabItem value="local" label="Run locally">
 
-For example:
-
-npm run dev
-
-
-Once the API is running, open the Swagger UI URL in your browser:
-
-http://localhost:3000/api-docs
-
-
-> **Note:** Replace the URL above if your API uses a different port or Swagger endpoint.
-
-## API Endpoints
-
-The Swagger UI documents the following product operations:
-
-Method	Endpoint	Description
-GET	/api/products	Retrieve all products
-GET	/api/products/:id	Retrieve a product by ID
-POST	/api/products	Create a new product
-PUT	/api/products/:id	Update an existing product
-DELETE	/api/products/:id	Delete a product
-Using Swagger UI
-1. Select an Endpoint
-Open Swagger UI and locate the endpoint you want to test.
-
-For example:
-
-GET /api/products
-This endpoint retrieves products from the catalog.
-
-2. Click "Try it out"
-Select the Try it out button to enable the request fields.
-
-You can then enter parameters or request data required by the endpoint.
-
-3. Enter Request Parameters
-For example, the products endpoint supports filtering:
-
-category=electronics
-You can also use other supported parameters such as:
-
-status=in_stock
-sort=-price
-page=1
-limit=5
-4. Execute the Request
-Click the Execute button.
-
-Swagger UI sends the request to the API and displays the server response.
-
-For example:
-
-GET /api/products?category=electronics&status=in_stock
-Request and Response
-Swagger UI displays both the request information and the API response.
-
-A successful response may look similar to:
+Start the API, then open Swagger UI in your browser:
 
 ```bash
+npm run dev
+```
 
+```text
+http://localhost:3000/api-docs
+```
+
+If your API uses a different port or path, use that instead.
+
+</TabItem>
+</Tabs>
+
+## Send a Request in Four Steps
+
+1. **Choose an endpoint.** Click a route such as `GET /api/products` to expand it.
+2. **Click Try it out.** This unlocks the parameter and request body fields.
+3. **Fill in the details.** Enter query parameters, a product ID, or a JSON body.
+4. **Click Execute.** The **Server response** section shows the status code and the JSON result.
+
+## Try Each Operation
+
+<Tabs>
+<TabItem value="get" label="GET" default>
+
+**List products:** `GET /api/products`. Leave the fields empty, or set `limit` to `5`.
+
+**One product:** `GET /api/products/{id}`. Enter `1` as the `id`.
+
+You should see a `200` response. An ID that does not exist returns `404`. To filter, sort, or page through the list, see [Query Features](../Query%20Features/filtering.md).
+
+```json
 {
   "id": 1,
-  "name": "Wireless Headphones",
+  "name": "Wireless Noise-Canceling Headphones",
   "category": "electronics",
-  "price": 79.99,
+  "price": 199.99,
+  "stock": 45,
   "status": "in_stock"
 }
 ```
-The exact response structure depends on the API implementation.
 
-Testing POST Requests
-Swagger UI can also be used to test the POST /api/products endpoint.
+</TabItem>
+<TabItem value="post" label="POST">
 
-Select:
+`POST /api/products`. Paste a JSON body into the request body field:
 
-POST /api/products
-Click Try it out and provide the product information in the request body.
-
-Example:
-
-```bash
-
+```json
 {
-  "name": "Wireless Headphones",
+  "name": "Bluetooth Speaker",
   "category": "electronics",
-  "price": 79.99,
+  "price": 49.99,
+  "stock": 20,
   "status": "in_stock"
 }
 ```
-Click Execute to send the request.
 
-If the request is successful, the API returns the newly created product.
+A `201` response means the product was created. You get `400` for invalid input, such as a negative price, and `409` if a product with that name already exists.
 
-Testing PUT Requests
-To update an existing product, select:
+</TabItem>
+<TabItem value="put" label="PUT">
 
-PUT /api/products/:id
-Provide the product ID and the updated product information.
+`PUT /api/products/{id}`. Enter the `id` of the product, then paste the updated values into the request body:
 
-For example:
+```json
+{
+  "name": "Bluetooth Speaker Pro",
+  "category": "electronics",
+  "price": 59.99,
+  "stock": 15,
+  "status": "in_stock"
+}
+```
 
-PUT /api/products/1
-Then provide the updated data in the request body.
+A `200` response means the product was updated. An unknown ID returns `404`.
 
-Testing DELETE Requests
-To delete a product, select:
+</TabItem>
+<TabItem value="delete" label="DELETE">
 
-DELETE /api/products/:id
-Provide the ID of the product you want to delete.
+`DELETE /api/products/{id}`. Enter the `id` of the product, then click **Execute**.
 
-For example:
+A `200` response means the product was removed. An unknown ID returns `404`.
 
-DELETE /api/products/1
-Click Execute to send the request.
+:::warning
 
-Query Parameters
-The Swagger UI also documents the query parameters supported by the products endpoint.
+Deleting a product cannot be undone, so use a test product.
 
-Filtering
-Products can be filtered by category:
+:::
 
-category=electronics
-Products can also be filtered by inventory status:
+</TabItem>
+</Tabs>
 
-status=in_stock
-Supported status values are:
+## Understand the Response
 
-in_stock
-out_of_stock
-discontinued
-Sorting
-Products can be sorted using the sort parameter.
+| Code | Meaning |
+|---|---|
+| `200` | The request succeeded |
+| `201` | The product was created |
+| `400` | The input is invalid (for example, a missing field or a negative price) |
+| `404` | No product exists with that ID |
+| `409` | A product with that name already exists |
 
-Sort by price in ascending order:
+## Next Steps
 
-sort=price
-Sort by price in descending order:
-
-sort=-price
-Sort alphabetically by product name:
-
-sort=name
-Pagination
-The API supports pagination using the page and limit parameters.
-
-For example:
-
-page=1
-limit=5
-This can be combined into a request such as:
-
-GET /api/products?page=1&limit=5
-The default page size is 10 products per response.
-
-Example Request
-Swagger UI can be used to test multiple query parameters together.
-
-For example:
-
-GET /api/products?category=electronics&status=in_stock&sort=-price&page=1&limit=5
-This request:
-
-Filters products by the electronics category.
-Returns products that are currently in_stock.
-Sorts products by price from highest to lowest.
-Requests the first page.
-Limits the response to five products.
-Benefits of Swagger UI
-Using Swagger UI makes the API easier to understand and test because developers can:
-
-Explore available endpoints
-Understand request parameters
-View API schemas
-Test requests without external API clients
-Inspect API responses
-Experiment with different query parameters
-Next Steps
-Now that Swagger UI is set up, continue to the API Reference section to learn about each product endpoint in detail.
+Read the [API Reference](../API%20Reference/get-products.md) for each endpoint in detail, or see [Query Features](../Query-Features/filtering.md) to filter, sort, and paginate results.

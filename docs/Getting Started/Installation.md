@@ -1,149 +1,71 @@
 ---
 sidebar_position: 1
+description: Install and run the E-Commerce Product Catalog API on your own machine.
 ---
 
 # Installation
-```bash
-Documentation
-│
-├── Introduction
-│
-├── Getting Started
-│   ├── Installation
-│   └── Swagger UI
-│
-├── API Reference
-│   └── Products
-│       ├── Get All Products
-│       ├── Get Product by ID
-│       ├── Create Product
-│       ├── Update Product
-│       └── Delete Product
-│
-├── Query Features
-│   ├── Filtering
-│   ├── Sorting
-│   └── Pagination
-│
-├── Guides
-│   ├── Working with Products
-│   └── API Usage Examples
-│
-├── API Conventions
-│
-├── Error Handling
-│   ├── HTTP Status Codes
-│   └── Error Responses
-│
-├── Troubleshooting
-│   └── Common Issues
-│
-└── FAQ
-    └── Frequently Asked Questions
-```
-    
-This guide explains how to install and run the **E-Commerce Product Catalog API** in a local development environment.
+
+This guide shows you how to install and run the E-Commerce Product Catalog API locally. You can also skip the installation and try the [live Swagger UI](https://vikram-swaggerui.onrender.com).
 
 ## Prerequisites
 
-Before you begin, make sure the following software is installed on your system:
+| Tool | Used for | Check it with |
+|---|---|---|
+| Node.js | Runs the API | `node -v` |
+| npm | Installs the packages | `npm -v` |
+| Git | Clones the repository | `git --version` |
 
-- **Node.js** — JavaScript runtime environment
-- **npm** — Node.js package manager
-- **Git** — Version control system
+## Install and Run
 
-Verify the installations by running:
+1. **Clone the repository** and go into the project folder:
 
-node -v npm -v git --version
+   ```bash
+   git clone https://github.com/<your-username>/<repository-name>.git
+   cd <repository-name>
+   ```
 
+2. **Install the dependencies** listed in `package.json`:
 
-## Clone the Repository
+   ```bash
+   npm install
+   ```
 
-Clone the E-Commerce Product Catalog API repository:
+3. **Start the API** in development mode:
 
-git clone URL
+   ```bash
+   npm run dev
+   ```
 
+:::tip[Port already in use?]
 
-Replace URL with the URL of your API repository.
+This documentation site also starts on port 3000 by default. If both run at the same time, one of them needs a different port.
 
-Navigate to the project directory:
+:::
 
-cd project-directory
+## Check That It Works
 
+Open the products endpoint in your browser:
 
-## Install Dependencies
-
-Install all required project dependencies using npm:
-
-npm install
-
-
-This installs the packages defined in the project's `package.json` file.
-
-## Start the API
-
-Start the API development server:
-
-npm run dev
-
-
-Once the server starts successfully, the API will be available at the configured local URL.
-
-For example:
-
-http://localhost:3000
-
-
-## Verify the Installation
-
-You can verify that the API is running by sending a request to the products endpoint:
-
-GET /api/products
-
-
-For example:
-
+```text
 http://localhost:3000/api/products
+```
 
+You should see a JSON response with a `data` list of products and a `pagination` object.
 
-A successful request should return the products available in the catalog.
+:::tip[Success]
 
-## Access Swagger UI
+If the JSON appears, the API is running.
 
-The API includes **Swagger UI**, which provides an interactive interface for exploring and testing the API.
+:::
 
-Open Swagger UI in your browser using the configured Swagger endpoint:
+## Open Swagger UI
 
+Swagger UI lets you view every endpoint and send requests from the browser:
+
+```text
 http://localhost:3000/api-docs
-
-
-Swagger UI allows you to:
-
-- View all available API endpoints
-- Inspect request parameters
-- View request and response schemas
-- Execute API requests directly from the browser
-- Test `GET`, `POST`, `PUT`, and `DELETE` operations
+```
 
 ## Next Steps
 
-After successfully installing and running the API, continue to the **Swagger UI** guide to learn how to explore and test the API interactively.
-Important
-Your file should look like this in VS Code:
-
-installation.md
-And the very first line should be:
-
----
-Not:
-
-sidebar_position: 1
-The three dashes are important because they tell Docusaurus that the following section is front matter.
-
-Also, if your API does not use:
-
-npm run dev
-or Swagger is not at:
-
-/api-docs
-tell me what your API uses, and I'll adjust the documentation to match your actual project.
+Continue to the [Swagger UI guide](./swagger.md) to learn how to explore and test the API. If something does not work, see [Troubleshooting](../troubleshooting/common-issues.md).

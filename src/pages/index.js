@@ -3,8 +3,8 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
-
 import Heading from '@theme/Heading';
+
 import styles from './index.module.css';
 
 function HomepageHeader() {
@@ -17,10 +17,13 @@ function HomepageHeader() {
         </Heading>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
         <div className={styles.buttons}>
+          <Link className="button button--secondary button--lg" to="/docs/intro">
+            Get Started
+          </Link>
           <Link
-            className="button button--secondary button--lg"
-            to="/docs/intro">
-            Docusaurus Tuttorial - 5min ⏱️
+            className="button button--outline button--secondary button--lg"
+            href="https://vikram-swaggerui.onrender.com">
+            Try Swagger UI
           </Link>
         </div>
       </div>
@@ -32,8 +35,8 @@ export default function Home() {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title={`Hello from Vik ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
+      title={siteConfig.title}
+      description="Documentation for the E-Commerce Product Catalog API: installation, endpoints, filtering, sorting, and pagination.">
       <HomepageHeader />
       <main>
         <HomepageFeatures />
