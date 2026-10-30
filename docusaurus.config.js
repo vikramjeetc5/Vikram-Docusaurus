@@ -12,7 +12,7 @@ const config = {
   },
 
   // Replace with your real address after you deploy
-  url: 'https://your-site-name.onrender.com',
+  url: 'https://vikram-docusaurus.onrender.com',
   baseUrl: '/',
 
   // Replace with your GitHub user name and repository name
