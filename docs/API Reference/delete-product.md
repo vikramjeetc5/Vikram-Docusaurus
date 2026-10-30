@@ -23,7 +23,7 @@ Test this endpoint in [Swagger UI](https://vikram-swaggerui.onrender.com): open 
 
 :::warning[This cannot be undone]
 
-A deleted product is gone for good. When you are testing, create a product with [Create Product](./create-product.md) first, and delete that one.
+A deleted product is gone for good. When you are testing, create a product with **Create Product** first, and delete that one.
 
 :::
 

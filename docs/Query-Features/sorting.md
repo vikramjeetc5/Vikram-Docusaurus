@@ -63,7 +63,7 @@ const result = await response.json();
 </TabItem>
 </Tabs>
 
-This returns the electronics products with the most expensive first. The response has the same structure as [Get All Products](../API%20Reference/get-products.md).
+This returns the electronics products with the most expensive first. The response has the same structure as **Get All Products**.
 
 ## Combine Sorting
 

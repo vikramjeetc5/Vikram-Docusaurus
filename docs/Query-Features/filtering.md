@@ -61,7 +61,7 @@ const result = await response.json();
 </TabItem>
 </Tabs>
 
-This returns the electronics products that are in stock. The response has the same structure as [Get All Products](../API%20Reference/get-products.md).
+This returns the electronics products that are in stock. The response has the same structure as **Get All Products**.
 
 ## Combine Filters
 
