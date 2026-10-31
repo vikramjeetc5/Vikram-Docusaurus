@@ -2,8 +2,14 @@
 
 Documentation site for the **E-Commerce Product Catalog API**, a REST API for managing products in an online store's catalog. It explains how to install and run the API, how to use Swagger UI, and how every endpoint, query feature, and common problem works.
 
-**Live documentation:** <https://your-docs-site-link>
-**Live Swagger UI:** <https://vikram-swaggerui.onrender.com>
+
+## Try Now
+
+[![Live documentation](https://img.shields.io/badge/Live_Demo-Swagger_UI-22C55E?style=for-the-badge&logo=render)](https://vikram-docusaurus.onrender.com)
+
+[![Live Swagger UI](https://img.shields.io/badge/Live_Demo-Swagger_UI-22C55E?style=for-the-badge&logo=render)](https://vikram-swaggerui.onrender.com)
+
+
 
 ## What's Inside
 
@@ -26,7 +32,7 @@ Documentation site for the **E-Commerce Product Catalog API**, a REST API for ma
 ## Run Locally
 
 ```bash
-git clone https://github.com/<your-username>/<repository-name>.git
+git clone https://github.com/vikramjeetc5/Vikram-Docusaurus.git
 cd <repository-name>
 npm install
 npm start
@@ -57,6 +63,3 @@ src/
 
 [Docusaurus](https://docusaurus.io/), Markdown and MDX, Swagger UI (OpenAPI 3.0), and Git.
 
-## Author
-
-**<Your Name>**: <https://www.linkedin.com/in/your-profile> | <https://github.com/your-username>
