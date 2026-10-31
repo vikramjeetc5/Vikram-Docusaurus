@@ -33,7 +33,7 @@ Documentation site for the **E-Commerce Product Catalog API**, a REST API for ma
 
 ```bash
 git clone https://github.com/vikramjeetc5/Vikram-Docusaurus.git
-cd <repository-name>
+cd <Vikram-Docusaurus>
 npm install
 npm start
 ```
