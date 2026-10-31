@@ -3,11 +3,11 @@
 Documentation site for the **E-Commerce Product Catalog API**, a REST API for managing products in an online store's catalog. It explains how to install and run the API, how to use Swagger UI, and how every endpoint, query feature, and common problem works.
 
 
-## Try Now
+## 🚀 Try Now
 
-[![Live documentation](https://img.shields.io/badge/Live_Demo-Swagger_UI-22C55E?style=for-the-badge&logo=render)](https://vikram-docusaurus.onrender.com)
+[![Live Documentation](https://img.shields.io/badge/Live-Documentation-22C55E?style=for-the-badge&logo=docusaurus&logoColor=white)](https://vikram-docusaurus.onrender.com)
 
-[![Live Swagger UI](https://img.shields.io/badge/Live_Demo-Swagger_UI-22C55E?style=for-the-badge&logo=render)](https://vikram-swaggerui.onrender.com)
+[![Live Swagger UI](https://img.shields.io/badge/Live-Swagger_UI-326CE5?style=for-the-badge&logo=swagger&logoColor=white)](https://vikram-swaggerui.onrender.com)
 
 
 
